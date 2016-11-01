@@ -1,0 +1,101 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity alu_control_demo_32 is
+port(
+control : out std_logic_vector (3 downto 0)
+);
+end alu_control_demo_32;
+
+architecture structural of alu_control_demo_32 is
+component alu_control is
+port (
+aluop: in std_logic_vector (2 downto 0);
+func: in std_logic_vector (5 downto 0);
+control : out std_logic_vector (3 downto 0)
+);
+end component;
+signal aluop : std_logic_vector(31 downto 0);
+signal func : std_logic_vector(31 downto 0);
+begin
+ alu_control_map : alu_control port map (aluop => aluop, func => func, control => control);
+ 
+ test_proc : process
+ begin
+
+ -- lw/sw
+ aluop <= "000";
+ control <= "011010";
+ wait for 5 ns;
+
+ -- addi
+ aluop <= "001";
+ control <= "011010";
+ wait for 5 ns;
+
+ -- r type
+ -- add
+ aluop <= "010";
+ control <= "000000";
+ wait for 5 ns;
+
+ -- addu
+ aluop <= "010";
+ control <= "000010";
+ wait for 5 ns;
+
+-- sub
+ aluop <= "010";
+ control <= "100110";
+ wait for 5 ns;
+
+ -- subu
+ aluop <= "010";
+ control <= "100111";
+ wait for 5 ns;
+
+ -- and
+ aluop <= "010";
+ control <= "000011";
+ wait for 5 ns;
+
+ -- or
+ aluop <= "010";
+ control <= "011001";
+ wait for 5 ns;
+
+-- sll
+ aluop <= "010";
+ control <= "011010";
+ wait for 5 ns;
+
+ -- slt
+ aluop <= "010";
+ control <= "100000";
+ wait for 5 ns;
+
+ -- sltu
+ aluop <= "010";
+ control <= "100001";
+ wait for 5 ns;
+
+ -- beq
+ aluop <= "100";
+ control <= "011010";
+ wait for 5 ns;
+
+ -- bne
+ aluop <= "101";
+ control <= "011010";
+ wait for 5 ns;
+
+ -- bgtz
+ aluop <= "110";
+ control <= "011010";
+ wait for 5 ns;
+
+ wait;
+
+end process;
+
+end architecture structural;

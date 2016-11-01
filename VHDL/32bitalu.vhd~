@@ -1,0 +1,23 @@
+library ieee; 
+use ieee.std_logic_1164.all; 
+use work.eecs361_gates.all; 
+
+entity 32bitalu is
+	port (
+		x	: in	std_logic;
+		y	: in	std_logic;
+		control	: in	std_logic;
+		cout	: in	std_logic;
+		overflow : out	std_logic;
+		zero	: out	std_logic;
+		result	: out	std_logic
+	);
+end alu;
+
+architecture structural of 32bitalu is
+signal yim : std_logic;
+begin
+ -- addition
+ yim_map : yim => not_gate_32 port map (x => y, z => yim);
+ 
+end structural;
