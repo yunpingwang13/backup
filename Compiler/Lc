@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/home/software/racket-6.4/bin/racket Lc.rkt "$@"
+as -o prog.o prog.S
+gcc -O2 -c -g -o runtime.o runtime.c
+gcc -o a.out prog.o runtime.o
